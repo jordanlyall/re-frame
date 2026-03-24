@@ -6,3 +6,4 @@ To submit your own photo, add the image to `docs/gallery/`, add a row to the tab
 
 | Photo | Frame | Owner | Description |
 |-------|-------|-------|-------------|
+| <img src="lago-genesis-squiggle.jpg" width="200"> | LAGO Genesis | [@jordanlyall](https://github.com/jordanlyall) | Office wall. Running Chromie Squiggles by Snowfro in dark theme. |
