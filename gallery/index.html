@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:100%;height:100%;overflow:hidden;background:#000}
+#frame{position:absolute;top:0;left:0;width:100%;height:100%;border:none;opacity:0;
+  -webkit-transition:opacity 1.5s ease;transition:opacity 1.5s ease}
+#img{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:contain;opacity:0;display:none;
+  -webkit-transition:opacity 1.5s ease;transition:opacity 1.5s ease}
+#info{position:absolute;bottom:0;left:0;right:0;padding:40px 48px;
+  background:-webkit-linear-gradient(top,transparent,rgba(0,0,0,0.85));
+  background:linear-gradient(transparent,rgba(0,0,0,0.85));
+  opacity:0;-webkit-transition:opacity 1.5s ease;transition:opacity 1.5s ease;
+  z-index:10}
+#name{color:#fff;font-size:28px;font-weight:bold;font-family:sans-serif}
+#artist{color:rgba(255,255,255,0.6);font-size:20px;margin-top:6px;font-family:sans-serif}
+</style>
+<link id="theme" rel="stylesheet" href="">
+</head>
+<body>
+<iframe id="frame"></iframe>
+<img id="img">
+<div id="info"><div id="name"></div><div id="artist"></div></div>
+<script>
+var defaults = {
+  interval_live: 45000,
+  interval_static: 30000,
+  shuffle: true,
+  show_info: true,
+  info_duration: 5000,
+  theme: "dark"
+};
+
+var config = {};
+var manifest = [];
+var idx = 0;
+var timer = null;
+
+var frameEl = document.getElementById("frame");
+var imgEl = document.getElementById("img");
+var infoEl = document.getElementById("info");
+var nameEl = document.getElementById("name");
+var artistEl = document.getElementById("artist");
+var themeEl = document.getElementById("theme");
+
+function loadConfig(callback) {
+  var xhr = new XMLHttpRequest();
+  xhr.open("GET", "config.json?" + Date.now(), true);
+  xhr.onload = function() {
+    try {
+      var data = JSON.parse(xhr.responseText);
+      var g = data.gallery || {};
+      config.interval_live   = (typeof g.interval_live   === "number") ? g.interval_live   : defaults.interval_live;
+      config.interval_static = (typeof g.interval_static === "number") ? g.interval_static : defaults.interval_static;
+      config.shuffle         = (typeof g.shuffle         === "boolean") ? g.shuffle         : defaults.shuffle;
+      config.show_info       = (typeof g.show_info       === "boolean") ? g.show_info       : defaults.show_info;
+      config.info_duration   = (typeof g.info_duration   === "number") ? g.info_duration   : defaults.info_duration;
+      config.theme           = (typeof g.theme           === "string")  ? g.theme           : defaults.theme;
+    } catch(e) {
+      config = {
+        interval_live:   defaults.interval_live,
+        interval_static: defaults.interval_static,
+        shuffle:         defaults.shuffle,
+        show_info:       defaults.show_info,
+        info_duration:   defaults.info_duration,
+        theme:           defaults.theme
+      };
+    }
+    callback();
+  };
+  xhr.onerror = function() {
+    config = {
+      interval_live:   defaults.interval_live,
+      interval_static: defaults.interval_static,
+      shuffle:         defaults.shuffle,
+      show_info:       defaults.show_info,
+      info_duration:   defaults.info_duration,
+      theme:           defaults.theme
+    };
+    callback();
+  };
+  xhr.send();
+}
+
+function loadManifest(callback) {
+  var xhr = new XMLHttpRequest();
+  xhr.open("GET", "manifest.json?" + Date.now(), true);
+  xhr.onload = function() {
+    try {
+      var data = JSON.parse(xhr.responseText);
+      if (Array.isArray(data) && data.length > 0) {
+        manifest = data;
+      }
+    } catch(e) {}
+    callback();
+  };
+  xhr.onerror = function() {
+    callback();
+  };
+  xhr.send();
+}
+
+function loadTheme() {
+  if (config.theme) {
+    themeEl.href = "themes/" + config.theme + ".css";
+  }
+}
+
+function shuffle(arr) {
+  var i = arr.length, j, tmp;
+  while (i > 1) {
+    j = Math.floor(Math.random() * i);
+    i--;
+    tmp = arr[i];
+    arr[i] = arr[j];
+    arr[j] = tmp;
+  }
+  return arr;
+}
+
+function show() {
+  if (!manifest.length) return;
+
+  var entry = manifest[idx];
+  var type = entry.type === "image" ? "image" : "iframe";
+  var interval = (type === "image") ? config.interval_static : config.interval_live;
+
+  frameEl.style.opacity = "0";
+  imgEl.style.opacity = "0";
+  infoEl.style.opacity = "0";
+
+  setTimeout(function() {
+    var loaded = false;
+
+    function onLoaded() {
+      if (loaded) return;
+      loaded = true;
+
+      if (type === "iframe") {
+        frameEl.style.opacity = "1";
+      } else {
+        imgEl.style.opacity = "1";
+      }
+
+      if (config.show_info) {
+        nameEl.textContent = entry.name || "";
+        artistEl.textContent = entry.artist || "";
+        infoEl.style.opacity = "1";
+        setTimeout(function() {
+          infoEl.style.opacity = "0";
+        }, config.info_duration);
+      }
+
+      if (timer) clearTimeout(timer);
+      timer = setTimeout(next, interval);
+    }
+
+    if (type === "iframe") {
+      imgEl.style.display = "none";
+      imgEl.src = "";
+      frameEl.style.display = "";
+      frameEl.src = "about:blank";
+
+      frameEl.onload = function() {
+        if (frameEl.src === "about:blank" || frameEl.src === "") return;
+        onLoaded();
+      };
+
+      setTimeout(function() {
+        frameEl.src = entry.url;
+      }, 50);
+
+      setTimeout(function() {
+        if (!loaded) {
+          loaded = true;
+          next();
+        }
+      }, 20000);
+
+    } else {
+      frameEl.style.display = "none";
+      frameEl.src = "about:blank";
+      imgEl.style.display = "";
+
+      imgEl.onload = function() {
+        onLoaded();
+      };
+      imgEl.onerror = function() {
+        if (!loaded) {
+          loaded = true;
+          next();
+        }
+      };
+
+      imgEl.src = entry.url;
+    }
+  }, 1500);
+}
+
+function next() {
+  idx = (idx + 1) % manifest.length;
+  if (idx === 0 && config.shuffle) {
+    shuffle(manifest);
+  }
+  show();
+}
+
+function checkBrightness() {
+  var xhr = new XMLHttpRequest();
+  xhr.open("GET", "/brightness.json?" + Date.now(), true);
+  xhr.onload = function() {
+    try {
+      var data = JSON.parse(xhr.responseText);
+      var b = (typeof data.brightness === "number") ? data.brightness : 1.0;
+      document.documentElement.style.filter = "brightness(" + b + ")";
+      document.documentElement.style.webkitFilter = "brightness(" + b + ")";
+    } catch(e) {
+      document.documentElement.style.filter = "brightness(1)";
+      document.documentElement.style.webkitFilter = "brightness(1)";
+    }
+  };
+  xhr.onerror = function() {
+    document.documentElement.style.filter = "brightness(1)";
+    document.documentElement.style.webkitFilter = "brightness(1)";
+  };
+  xhr.send();
+}
+
+loadConfig(function() {
+  loadManifest(function() {
+    loadTheme();
+    if (manifest.length === 0) return;
+    if (config.shuffle) shuffle(manifest);
+    show();
+    checkBrightness();
+    setInterval(checkBrightness, 5000);
+  });
+});
+</script>
+</body>
+</html>
