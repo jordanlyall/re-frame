@@ -1,0 +1,6 @@
+html, body { background: #f5f5f0; }
+#frame { box-shadow: 0 2px 20px rgba(0,0,0,0.1); }
+#name { color: #222; font-family: Georgia, 'Times New Roman', serif; font-size: 24px; font-weight: normal; }
+#artist { color: #666; font-family: Georgia, 'Times New Roman', serif; font-size: 18px; margin-top: 6px; }
+#info { background: -webkit-linear-gradient(top, transparent, rgba(245,245,240,0.9));
+        background: linear-gradient(transparent, rgba(245,245,240,0.9)); }
