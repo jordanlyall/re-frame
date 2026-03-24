@@ -1,12 +1,25 @@
-```
-                  ___
-  _ __ ___       / __| _ __  __ _  _ __   ___
- | '_// -_) === | (__ | '  \/ _` || '  \ / -_)
- |_|  \___|      \___||_|_|_\__,_||_|_|_|\___|
+<div align="center">
 
-  r e - f r a m e
-  revive bricked digital art frames
 ```
+ ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+ ┃                                           ┃
+ ┃   ██████  ███████         ███████ ██████   ┃
+ ┃   ██   ██ ██              ██      ██   ██  ┃
+ ┃   ██████  █████   ██████  █████   ██████   ┃
+ ┃   ██   ██ ██              ██      ██   ██  ┃
+ ┃   ██   ██ ███████         ██      ██   ██  ┃
+ ┃                                           ┃
+ ┃       revive bricked digital art frames   ┃
+ ┃                                           ┃
+ ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+```
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
+[![Devices](https://img.shields.io/badge/devices-1-blue.svg)](devices/)
+[![No Build Step](https://img.shields.io/badge/build_step-none-lightgrey.svg)]()
+
+</div>
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
