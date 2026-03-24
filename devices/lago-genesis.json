@@ -1,0 +1,31 @@
+{
+  "name": "LAGO Genesis Frame",
+  "manufacturer": "LAGO / MetaSill",
+  "status": "defunct",
+  "display": {
+    "size_inches": 33,
+    "resolution": "1920x1920",
+    "aspect": "1:1"
+  },
+  "system": {
+    "soc": "Rockchip RK3568",
+    "android_version": 11,
+    "webview_version": 83
+  },
+  "capabilities": {
+    "canvas_2d": true,
+    "webgl": false,
+    "video_playback": true,
+    "audio": true
+  },
+  "revival": {
+    "dead_packages": [
+      "com.lagoframe.frame",
+      "com.android.launcher3",
+      "art.whitewalls.tv",
+      "com.lago.android.updater"
+    ],
+    "adb_notes": "Wireless ADB survives reboot. Developer options accessible via standard Android method.",
+    "recommended_launcher": "de.ozerov.fully"
+  }
+}
