@@ -7,7 +7,7 @@
 
 Your digital art frame isn't dead.
 
-<!-- TODO: Add GIF/photo of revived frame -->
+<img src="docs/gallery/lago-genesis-squiggle.jpg" alt="LAGO Genesis frame displaying a Chromie Squiggle by Snowfro" width="600">
 
 ## The Problem
 
