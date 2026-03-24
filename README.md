@@ -1,25 +1,9 @@
-<div align="center">
-
-```
- ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
- ┃                                           ┃
- ┃   ██████  ███████         ███████ ██████   ┃
- ┃   ██   ██ ██              ██      ██   ██  ┃
- ┃   ██████  █████   ██████  █████   ██████   ┃
- ┃   ██   ██ ██              ██      ██   ██  ┃
- ┃   ██   ██ ███████         ██      ██   ██  ┃
- ┃                                           ┃
- ┃       revive bricked digital art frames   ┃
- ┃                                           ┃
- ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-```
+# re-frame
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
 [![Devices](https://img.shields.io/badge/devices-1-blue.svg)](devices/)
 [![No Build Step](https://img.shields.io/badge/build_step-none-lightgrey.svg)]()
-
-</div>
 
 Your digital art frame isn't dead.
 
