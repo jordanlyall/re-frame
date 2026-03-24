@@ -1,0 +1,20 @@
+{
+  "mode": "local",
+  "wallet": {
+    "address": "",
+    "api_key": "",
+    "provider": "alchemy"
+  },
+  "gallery": {
+    "interval_live": 45000,
+    "interval_static": 30000,
+    "shuffle": true,
+    "show_info": true,
+    "info_duration": 5000,
+    "theme": "dark"
+  },
+  "device": {
+    "ip": "",
+    "adb_port": 5555
+  }
+}

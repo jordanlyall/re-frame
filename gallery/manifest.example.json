@@ -1,0 +1,14 @@
+[
+  {
+    "url": "/assets/example.png",
+    "name": "Example Artwork",
+    "artist": "Artist Name",
+    "type": "image"
+  },
+  {
+    "url": "https://generator.artblocks.io/0x...",
+    "name": "Live Generative Piece",
+    "artist": "Artist Name",
+    "type": "iframe"
+  }
+]

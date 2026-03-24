@@ -1,0 +1,6 @@
+config.json
+gallery/manifest.json
+gallery/assets/*
+!gallery/assets/.gitkeep
+.DS_Store
+__pycache__/
