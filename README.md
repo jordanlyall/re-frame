@@ -1,4 +1,17 @@
-# re-frame
+```
+                  ___
+  _ __ ___       / __| _ __  __ _  _ __   ___
+ | '_// -_) === | (__ | '  \/ _` || '  \ / -_)
+ |_|  \___|      \___||_|_|_\__,_||_|_|_|\___|
+
+  r e - f r a m e
+  revive bricked digital art frames
+```
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
+[![Devices](https://img.shields.io/badge/devices-1-blue.svg)](devices/)
+[![No Build Step](https://img.shields.io/badge/build_step-none-lightgrey.svg)]()
 
 Your digital art frame isn't dead.
 
